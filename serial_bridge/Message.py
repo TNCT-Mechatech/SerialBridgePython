@@ -24,7 +24,7 @@ class Message():
 
         self._msg_id = str_list.get_msg_id()
         self._size = str_types[1]
-        self._strcut = struct.Struct('<'+str_types[0])
+        self._struct = struct.Struct('<'+str_types[0])
 
     def msg_id(self):
         return self._msg_id
@@ -32,8 +32,9 @@ class Message():
         return self._size
 
     def write_bytes(self, data):
-        return self._strcut.pack(*data)
+        return self._struct.pack(*data)
 
     def read_bytes(self, data):
-        return self._strcut.unpack(data)[0:self._size]
+        return self._struct.unpack(data)[0:self._size]
+
 
