@@ -10,7 +10,7 @@ import sys
 import serial
 import time
 
-from .msg.msg_base import StructMem
+from Message import Message
 
 class SerialBridge:
     BAUD_RATE = 9600
@@ -24,7 +24,7 @@ class SerialBridge:
     HEADER      =':'
     END         ='\n'
 
-    #StructMem objects
+    #Message objects
     _strs = []
 
     def __init__(self, device_name, serach_range=5, tty_head="ttyUSB"):
@@ -42,14 +42,14 @@ class SerialBridge:
         self.uart.close()
 
     def add_frame(self, message):
-        if issubclass(type(message), StructMem) == False:
+        if issubclass(type(message), Message) == False:
             return None #error!
         if len(self._strs) >= self.STRUCT_MAX_NUM:
             return None #error!
         self._strs.append(message)
 
     def send(self, id, message):
-        if issubclass(type(message), StructMem) == False:
+        if issubclass(type(message), Message) == False:
             return None #error!
 
         data_sum = 0
