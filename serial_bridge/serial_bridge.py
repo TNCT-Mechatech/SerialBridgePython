@@ -42,8 +42,6 @@ class SerialBridge:
         self.uart.close()
 
     def add_frame(self, message):
-        if issubclass(type(message), Message) == False:
-            return None #error!
         if len(self._strs) >= self.STRUCT_MAX_NUM:
             return None #error!
         self._strs.append(message)
