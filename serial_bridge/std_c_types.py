@@ -10,7 +10,7 @@
 # Author:   TaiyouKomazawa
 #
 
-class std_c_type:
+class std_c_types:
     def __init__(self):
         
         self.types = (
@@ -24,7 +24,7 @@ class std_c_type:
             self.Float32(),
             self.Unknown())
 
-    def _type_name_to_py_struct(self, names):
+    def to_py_struct(self, names):
         s_names = ''
         s_size = 0
         for i in names:
@@ -51,46 +51,46 @@ class std_c_type:
     class Int8(Type):
         INT8_SIZE = 1 #byte
         def __init__(self):
-            super(std_c_type.Int8,self).__init__("int8_t","b", self.INT8_SIZE)
+            super(std_c_types.Int8,self).__init__("int8_t","b", self.INT8_SIZE)
 
     class UInt8(Type):
         UINT8_SIZE = 1 #byte
         def __init__(self):
-            super(std_c_type.UInt8, self).__init__("uint8_t","B", self.UINT8_SIZE)
+            super(std_c_types.UInt8, self).__init__("uint8_t","B", self.UINT8_SIZE)
 
     class Int16(Type):
         INT16_SIZE = 2 #byte
         def __init__(self):
-            super(std_c_type.Int16,self).__init__("int16_t","h", self.INT16_SIZE)
+            super(std_c_types.Int16,self).__init__("int16_t","h", self.INT16_SIZE)
 
     class UInt16(Type):
         UINT16_SIZE = 2 #byte
         def __init__(self):
-            super(std_c_type.UInt16,self).__init__("uint16_t","H", self.UINT16_SIZE)
+            super(std_c_types.UInt16,self).__init__("uint16_t","H", self.UINT16_SIZE)
 
     class Int(Type):
         INT_SIZE = 4 #byte
         def __init__(self):
-            super(std_c_type.Int,self).__init__("int","i", self.INT_SIZE)
+            super(std_c_types.Int,self).__init__("int","i", self.INT_SIZE)
 
     class Int32(Type):
         INT32_SIZE = 4 #byte
         def __init__(self):
-            super(std_c_type.Int32,self).__init__("int32_t","i", self.INT32_SIZE)
+            super(std_c_types.Int32,self).__init__("int32_t","i", self.INT32_SIZE)
 
     class UInt32(Type):
         UINT32_SIZE = 4 #byte
         def __init__(self):
-            super(std_c_type.UInt32,self).__init__("uint32_t","I", self.UINT32_SIZE)
+            super(std_c_types.UInt32,self).__init__("uint32_t","I", self.UINT32_SIZE)
 
     class Float32(Type):
         FLOAT32_SIZE = 4 #byte
         def __init__(self):
-            super(std_c_type.Float32,self).__init__("float","f", self.FLOAT32_SIZE)
+            super(std_c_types.Float32,self).__init__("float","f", self.FLOAT32_SIZE)
 
     class Unknown(Type):
         def __init__(self):
-            super(std_c_type.Unknown,self).__init__("*","x", 0)
+            super(std_c_types.Unknown,self).__init__("*","x", 0)
 
         def get_t_name(self):
             self._error()
@@ -101,7 +101,3 @@ class std_c_type:
 
         def _error(self):
             raise ValueError("Your struct has nuknown data type.")
-
-test = std_c_type()
-ret = test._type_name_to_py_struct(("int8_t","uint16_t","int","float"))
-print(ret)
