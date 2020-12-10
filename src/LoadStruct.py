@@ -5,25 +5,25 @@
 # Author: testusuke
 # GitHub: https://github.com/testusuke
 
-import Struct as st
+import src.Struct as st
 import os
 import traceback
 import yaml
-#from strictyaml import load, Map, Str, Int, Seq, YAMLError
+from collections import OrderedDict
 
 class LoadStruct:
     def __init__(self,path):
-        print("info: init LoadStruct")
+        #print("info: init LoadStruct")
         self.path = path
         # load struct
         self.load_struct()
         
     def load_struct(self):
-        print("info: loading file:" + self.path)
+        #print("info: loading file:" + self.path)
         # check exist file
         if not os.path.exists(self.path):
             try:
-                raise ValueError("Error: fine not exist")
+                raise ValueError("Error: file not exist")
             except ValueError as e:
                 traceback.print_exc()
         # check file type
@@ -36,7 +36,10 @@ class LoadStruct:
         # get info
         try:
             with open(self.path) as file:
-                obj = yaml.safe_load(file)
+                # PyYaml Setting
+                yaml.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
+                    lambda loader, node: OrderedDict(loader.construct_pairs(node)))
+                obj = yaml.load(file)
                 print(obj)
                 # detect struct_name key
                 for key in obj.keys():
