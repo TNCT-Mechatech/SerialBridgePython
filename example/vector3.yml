@@ -1,0 +1,5 @@
+vector3_t:
+  x: "float"
+  y: "float"
+  z: "float"
+msg_id: 0
