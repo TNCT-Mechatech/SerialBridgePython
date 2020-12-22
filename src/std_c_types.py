@@ -13,7 +13,7 @@
 class std_c_types:
     def __init__(self):
         
-        self.types = (
+        self.types = [
             self.Int8(),
             self.UInt8(),
             self.Int16(),
@@ -22,7 +22,12 @@ class std_c_types:
             self.Int32(),
             self.UInt32(),
             self.Float32(),
-            self.Unknown())
+            self.Unknown()]
+
+    def set_type(self, type):
+        if type not in self.types:
+            self.types.insert(-1, type())
+
 
     def to_py_struct(self, names):
         s_names = ''
@@ -56,7 +61,7 @@ class std_c_types:
     class UInt8(Type):
         UINT8_SIZE = 1 #byte
         def __init__(self):
-            super(std_c_types.UInt8, self).__init__("uint8_t","B", self.UINT8_SIZE)
+            super(std_c_types.UInt8,self).__init__("uint8_t","B", self.UINT8_SIZE)
 
     class Int16(Type):
         INT16_SIZE = 2 #byte

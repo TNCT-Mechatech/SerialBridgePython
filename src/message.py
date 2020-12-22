@@ -16,13 +16,19 @@ import src.std_c_types as sct
 import src.LoadStruct as ls
 
 class Message:
-    def __init__(self, msg_path):
+    def __init__(self, msg_path, extend_msg=None):
         loadStruct = ls.LoadStruct(msg_path)
         str_list = loadStruct.get_struct()
 
         names = [i[0] for i in str_list.get_variable_list()]
         types = [i[1] for i in str_list.get_variable_list()]
-        str_types = sct.std_c_types().to_py_struct(types)
+
+        self.msg_types = sct.std_c_types()
+
+        if extend_msg != None:
+            for i in extend_msg:
+                self.msg_types.set_type(i)
+        str_types = self.msg_types.to_py_struct(types)
 
         self._msg_id = str_list.get_msg_id()
         self._size = str_types[1]
