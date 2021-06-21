@@ -1,6 +1,6 @@
 #encoding=utf-8
 # File: LoadStruct
-# Discription: you are able to get struct class(struct_name,msg_id(int),List<Pair<variable_name,variable_type>>) 
+# Description: you are able to get struct class(struct_name,msg_id(int),List<Pair<variable_name,variable_type>>)
 # Date: 2020/12/6
 # Author: testusuke
 # GitHub: https://github.com/testusuke
