@@ -13,8 +13,6 @@ import time
 from src.message import Message
 
 class SerialBridge:
-    BAUD_RATE = 9600
-
     HEDER_LEN = 2
     FOOTER_LEN = 2
 
@@ -27,8 +25,8 @@ class SerialBridge:
     #Message objects
     _strs = []
 
-    def __init__(self, device_name, serach_range=5, tty_head="ttyUSB", serach_min=0):
-        self.dev = self._search_node(device_name, serach_range, tty_head, min_num=serach_min)
+    def __init__(self, device_name, serach_range=5, tty_head="ttyUSB", serach_min=0, baud_rate=9600):
+        self.dev = self._search_node(device_name, serach_range, tty_head, min_num=serach_min, baud_rate=baud_rate)
 
     def _write(self, data):
         self.dev.write(str(data))
@@ -87,12 +85,12 @@ class SerialBridge:
         else:
             return -1
 
-    def _search_node(self, name, num, tty_head="ttyUSB", timeout=3.0, retries=3, min_num=0):
+    def _search_node(self, name, num, tty_head="ttyUSB", timeout=3.0, retries=3, min_num=0, baud_rate=9600):
         for i in range(retries):
             for j in range(min_num,num):
                 file_path = ''.join(['/dev/', tty_head, str(j)])
                 try:
-                    dev = serial.Serial(file_path, 9600, timeout=1.0, exclusive=True)
+                    dev = serial.Serial(file_path, baudrate=baud_rate, timeout=1.0, exclusive=True)
                     t = time.time()
                     while (time.time() - t) < timeout:
                         got_name = dev.readline().decode()
