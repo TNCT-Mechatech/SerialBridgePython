@@ -13,13 +13,11 @@ from collections import OrderedDict
 
 class LoadStruct:
     def __init__(self,path):
-        #print("info: init LoadStruct")
         self.path = path
         # load struct
         self.load_struct()
         
     def load_struct(self):
-        #print("info: loading file:" + self.path)
         # check exist file
         if not os.path.exists(self.path):
             try:
