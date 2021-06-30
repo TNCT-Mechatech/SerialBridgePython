@@ -1,4 +1,0 @@
-buttons_t:
-  sw0: "bools8_t"
-  sw1: "bools8_t"
-msg_id: 1
