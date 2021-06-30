@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-#encoding=utf-8
+# encoding=utf-8
 #
 # File:     Message.py
 #
@@ -15,6 +15,7 @@ from collections import namedtuple
 import src.std_c_types as sct
 import src.LoadStruct as ls
 
+
 class Message:
     def __init__(self, msg_path):
         loadStruct = ls.LoadStruct(msg_path)
@@ -26,15 +27,16 @@ class Message:
 
         self._msg_id = str_list.get_msg_id()
         self._size = str_types[1]
-        self._struct = struct.Struct('<'+str_types[0])
+        self._struct = struct.Struct('<' + str_types[0])
 
-        self.Data = namedtuple('Data',names)
-    
+        self.Data = namedtuple('Data', names)
+
     def set(self, **args):
         self.data = self.Data(**args)
 
     def msg_id(self):
         return self._msg_id
+
     def size(self):
         return self._size
 
@@ -42,4 +44,4 @@ class Message:
         return self._struct.pack(*self.data)
 
     def _read_bytes(self, data):
-        self.data = self.Data(*self._struct.unpack(data))#[0:self._size]
+        self.data = self.Data(*self._struct.unpack(data))  # [0:self._size]

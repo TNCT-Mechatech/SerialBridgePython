@@ -1,6 +1,6 @@
-#encoding=utf-8
+# encoding=utf-8
 # File: LoadStruct
-# Discription: you are able to get struct class(struct_name,msg_id(int),List<Pair<variable_name,variable_type>>) 
+# Description: you are able to get struct class(struct_name,msg_id(int),List<Pair<variable_name,variable_type>>)
 # Date: 2020/12/6
 # Author: testusuke
 # GitHub: https://github.com/testusuke
@@ -11,15 +11,14 @@ import traceback
 import yaml
 from collections import OrderedDict
 
+
 class LoadStruct:
-    def __init__(self,path):
-        #print("info: init LoadStruct")
+    def __init__(self, path):
         self.path = path
         # load struct
         self.load_struct()
-        
+
     def load_struct(self):
-        #print("info: loading file:" + self.path)
         # check exist file
         if not os.path.exists(self.path):
             try:
@@ -38,7 +37,7 @@ class LoadStruct:
             with open(self.path) as file:
                 # PyYaml Setting
                 yaml.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
-                    lambda loader, node: OrderedDict(loader.construct_pairs(node)))
+                                     lambda loader, node: OrderedDict(loader.construct_pairs(node)))
                 obj = yaml.load(file)
                 print(obj)
                 # detect struct_name key
@@ -48,13 +47,13 @@ class LoadStruct:
                     else:
                         self.struct_name = key
                 # create instance
-                self.struct = st.Struct(self.struct_name,self.msg_id)
+                self.struct = st.Struct(self.struct_name, self.msg_id)
                 # add variables
                 for key in obj[self.struct_name].keys():
                     variable_name = key
                     variable_type = obj[self.struct_name][key]
                     # add
-                    self.struct.add_variable(variable_name,variable_type)
+                    self.struct.add_variable(variable_name, variable_type)
         except Exception as e:
             traceback.print_exc()
 
