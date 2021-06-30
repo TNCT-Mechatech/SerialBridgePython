@@ -9,8 +9,7 @@ import src.message as msg
 import src.serial_bridge as pb
 
 vect1 = msg.Message("./vector3.yml")
-#dev = pb.SerialBridge("TestVect3", 16, "ttyS")
-dev = pb.SerialBridge("TestSimpleVect3", 16, "tty.usbmodem1430", baud_rate=115200)
+dev = pb.SerialBridge("TestSimpleVect3", 16, "ttyS", baud_rate=115200)
 
 dev.add_frame(vect1)
 
