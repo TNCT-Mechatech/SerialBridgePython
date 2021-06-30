@@ -1,8 +1,9 @@
 #! /usr/bin/env python
-#encoding:utf-8
+# encoding:utf-8
 
 import time
 import sys
+
 sys.path.append("../")
 
 import src.message as msg
@@ -14,8 +15,8 @@ dev = pb.SerialBridge("TestVect3", 16, "ttyS")
 
 dev.add_frame(vect2)
 
-while(True):
-    vect1.set(x= 0.321, y = 0.654, z = 0.123) #適当なデータ
+while (True):
+    vect1.set(x=0.321, y=0.654, z=0.123)  # 適当なデータ
     dev.send(0, vect1)
     if dev.recv() == 0:
         print(vect2.data.x)

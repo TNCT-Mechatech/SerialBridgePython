@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-#encoding=utf-8
+# encoding=utf-8
 #
 # File:     std_c_types.py
 #
@@ -12,7 +12,7 @@
 
 class std_c_types:
     def __init__(self):
-        
+
         self.types = (
             self.Int8(),
             self.UInt8(),
@@ -34,68 +34,80 @@ class std_c_types:
                     s_size = s_size + j.size()
                     break
         return (s_names, s_size)
-       
 
     class Type(object):
         def __init__(self, type_name, type_name_struct, size):
             self._t_name = type_name
             self._s_name = type_name_struct
             self._size = size
+
         def get_t_name(self):
             return self._t_name
+
         def get_s_name(self):
             return self._s_name
+
         def size(self):
             return self._size
-    
+
     class Int8(Type):
-        INT8_SIZE = 1 #byte
+        INT8_SIZE = 1  # byte
+
         def __init__(self):
-            super(std_c_types.Int8,self).__init__("int8_t","b", self.INT8_SIZE)
+            super(std_c_types.Int8, self).__init__("int8_t", "b", self.INT8_SIZE)
 
     class UInt8(Type):
-        UINT8_SIZE = 1 #byte
+        UINT8_SIZE = 1  # byte
+
         def __init__(self):
-            super(std_c_types.UInt8, self).__init__("uint8_t","B", self.UINT8_SIZE)
+            super(std_c_types.UInt8, self).__init__("uint8_t", "B", self.UINT8_SIZE)
 
     class Int16(Type):
-        INT16_SIZE = 2 #byte
+        INT16_SIZE = 2  # byte
+
         def __init__(self):
-            super(std_c_types.Int16,self).__init__("int16_t","h", self.INT16_SIZE)
+            super(std_c_types.Int16, self).__init__("int16_t", "h", self.INT16_SIZE)
 
     class UInt16(Type):
-        UINT16_SIZE = 2 #byte
+        UINT16_SIZE = 2  # byte
+
         def __init__(self):
-            super(std_c_types.UInt16,self).__init__("uint16_t","H", self.UINT16_SIZE)
+            super(std_c_types.UInt16, self).__init__("uint16_t", "H", self.UINT16_SIZE)
 
     class Int(Type):
-        INT_SIZE = 4 #byte
+        INT_SIZE = 4  # byte
+
         def __init__(self):
-            super(std_c_types.Int,self).__init__("int","i", self.INT_SIZE)
+            super(std_c_types.Int, self).__init__("int", "i", self.INT_SIZE)
 
     class Int32(Type):
-        INT32_SIZE = 4 #byte
+        INT32_SIZE = 4  # byte
+
         def __init__(self):
-            super(std_c_types.Int32,self).__init__("int32_t","i", self.INT32_SIZE)
+            super(std_c_types.Int32, self).__init__("int32_t", "i", self.INT32_SIZE)
 
     class UInt32(Type):
-        UINT32_SIZE = 4 #byte
+        UINT32_SIZE = 4  # byte
+
         def __init__(self):
-            super(std_c_types.UInt32,self).__init__("uint32_t","I", self.UINT32_SIZE)
+            super(std_c_types.UInt32, self).__init__("uint32_t", "I", self.UINT32_SIZE)
 
     class Float32(Type):
-        FLOAT32_SIZE = 4 #byte
+        FLOAT32_SIZE = 4  # byte
+
         def __init__(self):
-            super(std_c_types.Float32,self).__init__("float","f", self.FLOAT32_SIZE)
+            super(std_c_types.Float32, self).__init__("float", "f", self.FLOAT32_SIZE)
 
     class Unknown(Type):
         def __init__(self):
-            super(std_c_types.Unknown,self).__init__("*","x", 0)
+            super(std_c_types.Unknown, self).__init__("*", "x", 0)
 
         def get_t_name(self):
             self._error()
+
         def get_s_name(self):
             self._error()
+
         def size(self):
             self._error()
 
