@@ -10,7 +10,7 @@ import src.serial_bridge as pb
 
 vect1 = msg.Message("./vector3.yml")
 vect2 = msg.Message("./vector3.yml")
-dev = pb.SerialBridge("TestVect3", 16, "ttyUSB")
+dev = pb.SerialBridge("TestVect3", 16, "ttyS")
 
 dev.add_frame(vect2)
 
