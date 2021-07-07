@@ -6,15 +6,12 @@
 # Author:   TaiyouKomazawa
 #
 
-import sys
 import serial
 import time
 
-from src.message import Message
-
 
 class SerialBridge:
-    HEDER_LEN = 2
+    HEADER_LEN = 2
     FOOTER_LEN = 2
 
     STRUCT_MAX_NUM = 5
@@ -26,8 +23,8 @@ class SerialBridge:
     # Message objects
     _strs = []
 
-    def __init__(self, device_name, serach_range=5, tty_head="ttyUSB", serach_min=0, baud_rate=9600):
-        self.dev = self._search_node(device_name, serach_range, tty_head, min_num=serach_min, baud_rate=baud_rate)
+    def __init__(self, device_name, search_range=5, tty_head="ttyUSB", search_min=0, baud_rate=9600):
+        self.dev = self._search_node(device_name, search_range, tty_head, min_num=search_min, baud_rate=baud_rate)
 
     def _write(self, data):
         self.dev.write(str(data))
@@ -57,7 +54,7 @@ class SerialBridge:
     def recv(self):
         [check_sum, got_char] = self._read()
         if got_char == self.HEADER:
-            tmp = self._read(self.HEDER_LEN)
+            tmp = self._read(self.HEADER_LEN)
             id = ord(tmp[1][0])
             msg_id = ord(tmp[1][1])
             check_sum += tmp[0]
